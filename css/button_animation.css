@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+button {
+  margin: 1rem;
+}
+
+/* Unlike the display: inline property, which only respects left and right margins/paddings, display: inline-block respects the element's full margins and paddings (including top and bottom). */
+
+.btn {
+  background-color: var(--background-color);
+  color: #222;
+  padding: 0.5em 1em;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+
+  --background-color: #e3e3e3;
+}
+
+.btn.btn-border-pop::after {
+  content: "boy";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* right: 0; */
+  /* bottom: 0; */
+  /* width: 200px; */
+  /* height: 200px; */
+  background-color: red;
+  border-radius: 4px;
+}
+
+/* Here’s something I find myself needing to do again and again in CSS: completely covering one element with another. It’s the same CSS every time: the first element (the one that needs to be covered) has position: relative applied to it. The second has position: absolute and is positioned so that all four sides align to the edges of the first element. The full CSS looks like this: */
+
+/* .original-element {
+  position: relative;
+}
+
+.covering-element {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+} */
+
+/* Often it’s a heading or caption that needs to cover an image, sometimes with a translucent background colour or gradient. (I’d refer to this as an overlay.) Usually it’s a direct child of the first element which is being overlaid, but not always. Sometimes I want to overlay a pseudo element, maybe even transition or animate it for a hover state. Either way, I do it so often that it makes sense to create a utility class that covers it, rather than writing out the CSS properties longhand every time. */
+
+.overlay {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --color: rgba(0, 0, 0, 0.55);
+}
+
+body {
+  margin: 0;
+  pading: 1rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(183, 216, 232, 1);
+}
+
+.element {
+  position: relative;
+  width: min(15rem, 80vw);
+  height: min(15rem, 80vw);
+  background-color: darkorchid;
+}
+
+/* Utility classes */
+/* .overlay-child,
+.overlay-before,
+.overlay-after {
+  position: relative;
+} */
+
+.overlay-child::before {
+  position: absolute;
+  content: "Ade";
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: repeating-linear-gradient(
+      45deg,
+      var(--color),
+      var(--color) 0.5rem,
+      transparent 0,
+      transparent 1rem
+    ),
+    rgba(0, 0, 0, 0.2);
+}
